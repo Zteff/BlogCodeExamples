@@ -19,8 +19,8 @@ namespace UnitTest.ValidateArgumentToDependency
         [Test]
         public void MethodToTest_ValidInput_ValidateInputToDependency()
         {
-            A.CallTo(() => _fakeBar.SomeMethod(1)).Returns(1);
-            var expectedInputToDependency = 1;
+            A.CallTo(() => _fakeBar.SomeMethod(2)).Returns(2);
+            var expectedInputToDependency = 2;
             int actualInputToDependency = 0;
             A.CallTo(() => _fakeBar.SomeMethod(A<int>.Ignored)).Invokes((int i) => actualInputToDependency = i);
             var result = _sut.MethodToTest(1);;
@@ -39,7 +39,7 @@ namespace UnitTest.ValidateArgumentToDependency
 
         public int MethodToTest(int someArg)
         {
-            var valueFromBar = _bar.SomeMethod(someArg);
+            var valueFromBar = _bar.SomeMethod(someArg + 1);
             return valueFromBar + 1;
         }
     }
